@@ -1,7 +1,6 @@
+
 {% set favicon = theme_var('favicon') %}
 {% if favicon %}
  {% set favicon_data = favicon|first %}
- {% set favicon_path = favicon_data.path ?? null %}
- {% set favicon_url = favicon_path ? (favicon_path starts with '/' ? favicon_path : '/' ~ favicon_path) : 'theme://images/' ~ favicon_data.name %}
-<link rel="icon" href="{{ url(favicon_url) }}" type="{{ favicon_data.type }}">
+<link rel="icon" href="{{ url('theme://images/' ~ favicon_data.name) }}" type="{{ favicon_data.type }}">
 {% endif %}
