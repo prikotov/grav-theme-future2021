@@ -72,6 +72,26 @@
 {# -------------------------
    Structured Data (JSON-LD)
    ------------------------- #}
+{% set jsonld_taxonomy_authors = page.taxonomy.author|default([]) %}
+{% set jsonld_author_name = jsonld_taxonomy_authors|first %}
+{% if not jsonld_author_name %}
+  {% set jsonld_author_name = page.header.metadata.author|default(null) %}
+{% endif %}
+{% if not jsonld_author_name %}
+  {% set jsonld_author_name = page.header.author|default(null) %}
+{% endif %}
+{% if not jsonld_author_name %}
+  {% set jsonld_author_name = site.author.name|default(null) %}
+{% endif %}
+{% if not jsonld_author_name %}
+  {% set jsonld_author_name = 'Дмитрий Прикотов' %}
+{% endif %}
+{% set jsonld_language = grav.language.getActive ?: grav.config.site.default_lang ?: config.system.languages.default_lang ?: 'ru' %}
+{% set jsonld_description = meta_description|striptags|trim|truncate(150) %}
+{% set jsonld_date_modified = page.header.sitemap.lastmod|default(null) %}
+{% if not jsonld_date_modified %}
+  {% set jsonld_date_modified = page.modified ?: page.date %}
+{% endif %}
 <script type="application/ld+json">
 {{ {
   '@context': 'https://schema.org',
@@ -83,13 +103,14 @@
   headline: title|e,
   image: image ? (uri.base ~ image.url) : '',
   datePublished: page.date|date('c'),
-  inLanguage: grav.language.getActive ?: 'es',
+  dateModified: jsonld_date_modified|date('c'),
+  inLanguage: jsonld_language,
   wordCount: page.content|wordcount,
   author: {
     '@type': 'Person',
-    name: page.taxonomy.author[0] ?? 'Unknown',
+    name: jsonld_author_name,
   },
-  description: description,
+  description: jsonld_description,
 }|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_UNESCAPED_SLASHES'))|raw }}
 </script>
 
