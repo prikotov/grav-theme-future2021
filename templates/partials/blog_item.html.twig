@@ -105,7 +105,7 @@
     {% if page.taxonomy.tag %}
     <ul class="stats">
         {% for tag in page.taxonomy.tag %}
-          <li><a href="{{ blog.url }}/tag{{ config.system.param_sep }}{{ tag }}" itemprop="keywords" rel="nofollow">{{ tag }}</a></li>
+          <li><a href="{{ blog.url == '/' ? '' : blog.url }}/tag{{ config.system.param_sep }}{{ tag }}" itemprop="keywords" rel="nofollow">{{ tag }}</a></li>
         {% endfor %}
      </ul>
     {% endif %}
