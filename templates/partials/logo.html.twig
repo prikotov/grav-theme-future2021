@@ -1,10 +1,15 @@
 {% set logo = theme_var('custom_logo_mobile') ?: theme_var('custom_logo') %}
 
 {% if logo %}
-  {% set logo_file = (logo|first).name %}
-  {% set extension = logo_file|split('.')|last %}
+  {% set logo_data = logo|first %}
+  {% set logo_file = logo_data.name %}
+  {% set logo_path = logo_data.path ?? null %}
+  {% set extension = logo_file|split('.')|last|lower %}
 
-  {% if extension == 'svg' %}
+  {% if logo_path %}
+      {% set logo_url = logo_path starts with '/' ? logo_path : '/' ~ logo_path %}
+      <img src="{{ url(logo_url) }}" alt="{{ site.title|e }}" class="{{ logo_class }}" />
+  {% elseif extension == 'svg' %}
       {{ include(('@images/logo/' ~ logo_file)) }}
   {% else %}
       <img src="{{ url('theme://images/logo/' ~ logo_file) }}" alt="{{ site.title|e }}" class="{{ logo_class }}" />

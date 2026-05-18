@@ -5,7 +5,7 @@ form:
     favicon:
       type: file
       label: FUTURE.ADMIN.THEME.FAVICON
-      destination: 'theme@:/images'
+      destination: 'user://images/themes/future2021-prikotov'
       multiple: false
       avoid_overwriting: false
       random_name: false
@@ -17,7 +17,7 @@ form:
       type: file
       label: FUTURE.ADMIN.THEME.CUSTOM_LOGO
       size: large
-      destination: 'theme://images/logo'
+      destination: 'user://images/themes/future2021-prikotov'
       multiple: false
       markdown: true
       description: FUTURE.ADMIN.THEME.CUSTOM_LOGO_DESCRIPTION
@@ -28,7 +28,7 @@ form:
       type: file
       label: FUTURE.ADMIN.THEME.CUSTOM_LOGO_MOBILE
       size: large
-      destination: 'theme://images/logo'
+      destination: 'user://images/themes/future2021-prikotov'
       multiple: false
       accept:
         - image/*
