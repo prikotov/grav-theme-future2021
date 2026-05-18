@@ -1,18 +1,18 @@
-name: Future 2021
-slug: future2021
+name: Future 2021 Prikotov
+slug: future2021-prikotov
 type: theme
-version: 3.6.1
-description: Grav Future Imperfect by HTML5 UP (Version 2021)
+version: 3.6.1-prikotov.1
+description: Grav Future Imperfect by HTML5 UP (Version 2021), Prikotov fork
 icon:  microchip
 author:
   name: Pedro Moreno
   email: pmoreno@pmdesign.dev
   url: 
-homepage: https://github.com/pmoreno-rodriguez/grav-theme-future2021
+homepage: https://github.com/prikotov/grav-theme-future2021
 demo: https://future2021.pmdesign.dev
-docs: https://github.com/pmoreno-rodriguez/grav-theme-future2021/blob/main/README.md
+docs: https://github.com/prikotov/grav-theme-future2021/blob/develop/README.md
 keywords: future imperfect, html5up, theme, core, modern, fast, responsive, html5, css3
-bugs: https://github.com/pmoreno-rodriguez/grav-theme-future2021/issues
+bugs: https://github.com/prikotov/grav-theme-future2021/issues
 license: CC-BY-3.0
 
 dependencies:

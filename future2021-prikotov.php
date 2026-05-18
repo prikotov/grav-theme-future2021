@@ -5,19 +5,19 @@ use Grav\Common\Grav;
 use Grav\Common\Theme;
 
 /**
- * Future2021 Theme
+ * Future2021Prikotov Theme
  *
- * Class Future2021
+ * Class Future2021Prikotov
  *
  * @category Extensions
  * @package  Grav\Theme
  * @author   Pedro Moreno <https://github.com/pmoreno-rodriguez>
  * @license  http://www.opensource.org/licenses/mit-license.html MIT License
- * @link     https://github.com/pmoreno-rodriguez/grav-theme-future2021
+ * @link     https://github.com/prikotov/grav-theme-future2021
  */
 
 
-class Future2021 extends Theme
+class Future2021Prikotov extends Theme
 {
 
         public static function getSubscribedEvents()
