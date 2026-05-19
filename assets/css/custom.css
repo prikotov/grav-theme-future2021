@@ -14,3 +14,17 @@
     display: inline-block;
   }
 }
+
+@media screen and (max-width: 736px) {
+  .post > footer .stats {
+    flex-wrap: wrap;
+    gap: 1em 1.5em;
+    padding: 0;
+  }
+
+  .post > footer .stats li {
+    border-left: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
