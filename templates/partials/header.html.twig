@@ -38,9 +38,25 @@
         {% if config.plugins.simplesearch.enabled and icon_search %}
           {{ include('partials/simplesearch_searchbox.html.twig') }}
         {% endif %}
-        <li class="menu">
-          <a class="fa-bars" href="#menu">Menu</a>
-        </li>
+        {% set has_menu_navigation =
+          pages.children.visible.count > 0
+          or (theme_var('custommenus.enabled') and theme_var('custommenu') is not empty)
+        %}
+        {% set has_menu_panel_content =
+          (config.plugins.simplesearch.enabled and icon_search)
+          or (config.plugins.archives.enabled and archives_data is not empty)
+          or (config.plugins.relatedpages.enabled and related_pages|length > 0)
+          or (config.plugins.taxonomylist.enabled and page.template == 'blog')
+          or config.plugins.feed.enabled
+          or (config.plugins.login.enabled and icon_login)
+        %}
+        {% set has_menu_langswitcher = icon_lang and config.plugins.langswitcher.enabled and system.languages.supported is not null %}
+        {% set has_menu_content = has_menu_panel_content or has_menu_navigation or has_menu_langswitcher %}
+        {% if has_menu_content %}
+          <li class="menu{% if not has_menu_panel_content %} {{ has_menu_navigation ? 'menu-mobile-only' : 'menu-small-only' }}{% endif %}">
+            <a class="fa-bars" href="#menu">Menu</a>
+          </li>
+        {% endif %}
       </ul>
     {% endblock %}
   </nav>
