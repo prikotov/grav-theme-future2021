@@ -1,0 +1,9 @@
+FUTURE:
+  BLOG:
+    ITEM:
+      CONTINUE_READING: Читать дальше...
+      NEXT_POST: Следующая статья
+      PREV_POST: Предыдущая статья
+  SIDEBAR:
+    RECENT_POSTS:
+      HEADLINE: Новые статьи

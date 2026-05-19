@@ -1,5 +1,5 @@
 {# Support for Twig-Extensions and Translate-Date plugins #}
-{# Set page datestamp in folowing order with support for translations #}
+{# Set page datestamp in following order with support for translations #}
 {# FIRST: Page publication date #}
 {# SECOND: Page date #}
 {# LAST: Page modification date #}
@@ -9,13 +9,30 @@
 
 {% set default_format = system.pages.dateformat.default %}
 {% set short_format = system.pages.dateformat.short %}
+{% set page_date = page.header.publish_date ?: (page.date ?: page.modified) %}
 
 {% if config.plugins['translate-date'].enabled %}
-    {% set datestamp = (page.header.publish_date) ? (page.header.publish_date|td(lang, default_format)) : (page.date ? page.date|td(lang, default_format) : page.modified|td(lang, default_format)) %}
+    {% set datestamp = page_date|td(lang, default_format) %}
 {% elseif config.plugins['twig-extensions'].enabled %}
-    {% set datestamp = (page.header.publish_date) ? (page.header.publish_date|localizeddate('medium', 'none', lang)) : (page.date ? page.date|localizeddate('medium', 'none', lang) : page.modified|localizeddate('medium', 'none', lang)) %}
+    {% set datestamp = page_date|localizeddate('medium', 'none', lang) %}
+{% elseif lang|slice(0, 2) == 'ru' %}
+    {% set ru_months = {
+        1: 'января',
+        2: 'февраля',
+        3: 'марта',
+        4: 'апреля',
+        5: 'мая',
+        6: 'июня',
+        7: 'июля',
+        8: 'августа',
+        9: 'сентября',
+        10: 'октября',
+        11: 'ноября',
+        12: 'декабря'
+    } %}
+    {% set datestamp = page_date|date('j') ~ ' ' ~ ru_months[page_date|date('n')] ~ ' ' ~ page_date|date('Y') %}
 {% else %}
-    {% set datestamp = (page.header.publish_date) ? (page.header.publish_date|date(short_format)) : (page.date ? page.date|date(short_format) : page.modified|date(short_format)) %}
+    {% set datestamp = page_date|date(short_format) %}
 {% endif %}
 
 {{ datestamp }}
