@@ -28,13 +28,31 @@
 <meta name="twitter:url" content="{{ canonical_url }}">
 {% endif %}
 
+{# Optional page-level hreflang links. Example frontmatter:
+   alternates:
+     - hreflang: ru
+       href: https://example.com/page
+     - hreflang: en
+       href: https://example.com/page-en
+     - hreflang: x-default
+       href: https://example.com/page
+#}
+{% for alternate in page.header.alternates|default([]) %}
+  {% set alternate_lang = alternate.hreflang|default(alternate.lang|default(null)) %}
+  {% set alternate_href = alternate.href|default(alternate.url|default(null)) %}
+  {% if alternate_lang and alternate_href %}
+<link rel="alternate" hreflang="{{ alternate_lang|e }}" href="{{ alternate_href|e }}">
+  {% endif %}
+{% endfor %}
+
 {# -------------------------
    Description
    ------------------------- #}
 {# Description #}
-{% set meta_description = page.home()
+{% set header_description = page.header.metadata.description|default(null) %}
+{% set meta_description = header_description ?: (page.home()
     ? (site.metadata.description ?: site.title)
-    : (page.summary ?: site.metadata.description ?: site.title) %}
+    : (page.summary ?: site.metadata.description ?: site.title)) %}
 
 {% if meta_description %}
 <meta name="description" content="{{ meta_description|striptags|trim|truncate(150)|raw }}">
@@ -86,7 +104,7 @@
 {% if not jsonld_author_name %}
   {% set jsonld_author_name = 'Дмитрий Прикотов' %}
 {% endif %}
-{% set jsonld_language = grav.language.getActive ?: grav.config.site.default_lang ?: config.system.languages.default_lang ?: 'ru' %}
+{% set jsonld_language = page.header.lang|default(grav.language.getActive ?: grav.config.site.default_lang ?: config.system.languages.default_lang ?: 'ru') %}
 {% set jsonld_description = meta_description|striptags|trim|truncate(150) %}
 {% set jsonld_date_modified = page.header.sitemap.lastmod|default(null) %}
 {% if not jsonld_date_modified %}

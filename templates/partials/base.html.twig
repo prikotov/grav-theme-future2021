@@ -17,7 +17,7 @@
 {% set theme_config = attribute(config.themes, config.system.pages.theme) %}
 
 {# Set site language and datestamp for pages #}
-{% set lang = grav.language.getActive ?: grav.config.site.default_lang %}
+{% set lang = page.header.lang|default(grav.language.getActive ?: grav.config.site.default_lang) %}
 {% set datestamp = include('partials/page-bits/date.html.twig') %}
 
 {# Define if sidebar is shown in the page #}
