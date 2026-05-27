@@ -3,8 +3,8 @@
 {# Set CSS compression based on production mode #}
 {% set compress = theme_var('production-mode') ? '.min.css' : '.css' %}
 
-{# Set Google Fonts source - Local or Remote #}
-{% set google_fonts = theme_var('google_fonts_local') ? '-local.css' : '-remote.css' %}
+{# Always use bundled local fonts to avoid blocking first paint on fonts.googleapis.com timeouts. #}
+{% set google_fonts = '-local.css' %}
 
 {# Add stylesheets to assets #}
 {% do assets.addCss('theme://assets/css/main' ~ compress) %}

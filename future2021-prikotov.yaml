@@ -1,2 +1,3 @@
 enabled: true
 production-mode: false
+google_fonts_local: true

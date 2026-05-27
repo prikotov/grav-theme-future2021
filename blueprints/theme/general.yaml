@@ -29,8 +29,8 @@ form:
     google_fonts_local:
       type: toggle
       label: FUTURE.ADMIN.THEME.GOOGLE_FONTS.LOCAL
-      highlight: 0
-      default: 0
+      highlight: 1
+      default: 1
       options:
           1: PLUGIN_ADMIN.ENABLED
           0: PLUGIN_ADMIN.DISABLED
