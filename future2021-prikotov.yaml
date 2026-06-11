@@ -1,2 +1,4 @@
 enabled: true
 production-mode: false
+social_preview_image_base_url: ''
+social_preview_image_query: ''

@@ -20,7 +20,12 @@
    Canonical & URLs
    ------------------------- #}
    {# Canonical URL #}
+{% set current_query = uri.query() %}
+{% set use_current_url_for_social_preview = current_query and ('utm_source=tg' in current_query or 'utm_source=telegram' in current_query) %}
 {% set canonical_url = page.url(true, true) %}
+{% if use_current_url_for_social_preview %}
+  {% set canonical_url = canonical_url ~ '?' ~ current_query %}
+{% endif %}
 
 {% if canonical_url %}
 <link rel="canonical" href="{{ canonical_url }}">
@@ -65,8 +70,23 @@
    Featured Image
    ------------------------- #}
 {% if image %}
-{% set image_url = url(image.url, true) %}
+{% set social_preview_image_base_url = page.header.social_preview_image_base_url|default(theme_config.social_preview_image_base_url|default(''))|trim('/') %}
+{% set social_preview_image_query = page.header.social_preview_image_query|default(theme_config.social_preview_image_query|default(''))|trim('?& ') %}
+{% set image_path = image.url %}
+{% if image_path starts with 'http://' or image_path starts with 'https://' %}
+  {% set image_url = image_path %}
+{% elseif social_preview_image_base_url %}
+  {% set image_url = social_preview_image_base_url ~ '/' ~ image_path|trim('/') %}
+{% else %}
+  {% set image_url = url(image_path, true) %}
+{% endif %}
+{% if social_preview_image_query %}
+  {% set image_url = image_url ~ ('?' in image_url ? '&' : '?') ~ social_preview_image_query %}
+{% endif %}
 <meta property="og:image" content="{{ image_url }}">
+<meta property="og:image:secure_url" content="{{ image_url }}">
+{% if img_width %}<meta property="og:image:width" content="{{ img_width }}">{% endif %}
+{% if img_height %}<meta property="og:image:height" content="{{ img_height }}">{% endif %}
 <meta name="twitter:image" content="{{ image_url }}">
 <meta itemprop="image" content="{{ image_url }}">
 {% endif %}
@@ -119,7 +139,7 @@
     '@id': page.url(true),
   },
   headline: title|e,
-  image: image ? (uri.base ~ image.url) : '',
+  image: image ? image_url : '',
   datePublished: page.date|date('c'),
   dateModified: jsonld_date_modified|date('c'),
   inLanguage: jsonld_language,

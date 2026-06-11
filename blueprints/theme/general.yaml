@@ -36,3 +36,19 @@ form:
           0: PLUGIN_ADMIN.DISABLED
       validate:
           type: bool
+
+    social_preview_image_base_url:
+      type: text
+      label: Social preview image base URL
+      help: Optional absolute base URL for OpenGraph/Twitter/JSON-LD page images. Leave empty to use the current site URL.
+      placeholder: https://mirror4.prikotov.pro
+      default: ''
+      validate:
+        type: url
+
+    social_preview_image_query:
+      type: text
+      label: Social preview image query
+      help: Optional query string appended to OpenGraph/Twitter/JSON-LD page images for cache busting, for example tg=2026061101.
+      placeholder: tg=2026061101
+      default: ''
