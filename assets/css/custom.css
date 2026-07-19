@@ -15,16 +15,67 @@
   }
 }
 
+/*
+  Post tag list (footer .stats).
+  Upstream renders tags as a single non-wrapping flex row. When a post has
+  many tags, that row is wider than the footer (actions + tags + share) on
+  everything above the phone breakpoint, so tags run off-screen on tablets
+  and narrow/normal desktop windows.
+  Let tags wrap on every viewport and space them as chips, so long tag sets
+  stay inside the screen. Upstream's <=736px column-reverse footer keeps
+  working unchanged.
+*/
+body .post > footer .stats {
+  flex-wrap: wrap;
+  gap: 1em 1.5em;
+  padding: 0;
+}
+
+body .post > footer .stats li {
+  border-left: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+  Prev/Next post buttons (.actions).
+  Upstream sets .button{width:100%} and a flex footer, so on tablets and
+  narrow desktops the long label ("Предыдущая статья") wraps into two lines
+  and looks heavy; on phones the whole footer goes column, stacking the two
+  buttons vertically. We keep one line per button everywhere and on phones
+  also put the two buttons side by side with a short label
+  (Предыдущая/Следующая). Desktop keeps the full label and its layout.
+*/
+.post > footer .actions .btn-label-short {
+  display: none;
+}
+
+.post > footer .actions .button {
+  white-space: nowrap;
+}
+
 @media screen and (max-width: 736px) {
-  body .post > footer .stats {
-    flex-wrap: wrap;
-    gap: 1em 1.5em;
-    padding: 0;
+  body .post > footer > .actions {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.5em;
   }
 
-  body .post > footer .stats li {
-    border-left: 0;
-    margin: 0;
-    padding: 0;
+  body .post > footer > .actions > li {
+    flex: 1 1 0;
+  }
+
+  body .post > footer > .actions .button {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  body .post > footer > .actions .btn-label-full {
+    display: none;
+  }
+
+  body .post > footer > .actions .btn-label-short {
+    display: inline;
   }
 }

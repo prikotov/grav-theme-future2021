@@ -3,7 +3,9 @@ FUTURE:
     ITEM:
       CONTINUE_READING: Читать дальше...
       NEXT_POST: Следующая статья
+      NEXT_POST_SHORT: Следующая
       PREV_POST: Предыдущая статья
+      PREV_POST_SHORT: Предыдущая
     PAGINATION:
       PREVIOUS: Назад
       NEXT: Вперёд

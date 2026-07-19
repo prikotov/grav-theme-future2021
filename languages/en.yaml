@@ -297,7 +297,9 @@ FUTURE:
     ITEM:
       CONTINUE_READING: Continue reading...
       NEXT_POST: Next Post
+      NEXT_POST_SHORT: Next
       PREV_POST: Previous Post
+      PREV_POST_SHORT: Previous
     PAGINATION:
       PREVIOUS: Previous
       NEXT: Next
