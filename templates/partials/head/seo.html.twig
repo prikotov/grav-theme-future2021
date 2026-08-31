@@ -134,6 +134,7 @@
 {{ {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
+  url: page.url(true),
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': page.url(true),
@@ -147,6 +148,11 @@
   author: {
     '@type': 'Person',
     name: jsonld_author_name,
+    sameAs: [
+      'https://github.com/prikotov',
+      'https://www.linkedin.com/in/prikotov/',
+      'https://t.me/prikotov',
+    ],
   },
   description: jsonld_description,
 }|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_UNESCAPED_SLASHES'))|raw }}
